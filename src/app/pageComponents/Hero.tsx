@@ -1,14 +1,26 @@
+import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "./ui/button";
+
+import { motion } from "motion/react";
 
 interface HeroProps {
   onExploreTools: () => void;
   onViewCollections: () => void;
 }
 
-export function Hero({ onExploreTools, onViewCollections }: HeroProps) {
+export function Hero() {
+  const handleExploreTools = () => {
+    const toolsSection = document.getElementById("tools");
+    if (toolsSection) {
+      const yOffset = -100; // offset in pixels (negative = scroll higher)
+      const y =
+        toolsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden min-h-screen flex items-center">
       {/* Animated gradient background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -96,7 +108,7 @@ export function Hero({ onExploreTools, onViewCollections }: HeroProps) {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-6xl lg:text-7xl mb-6 tracking-tight"
         >
-          Master Every CSS Effect
+          Play CSS Effects
           <br />
           <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             with The CSS Maverick
@@ -120,20 +132,12 @@ export function Hero({ onExploreTools, onViewCollections }: HeroProps) {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Button
-            onClick={onExploreTools}
+            onClick={handleExploreTools}
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-lg hover:shadow-xl transition-all hover:scale-105 group"
           >
             Explore Tools
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button
-            onClick={onViewCollections}
-            size="lg"
-            variant="outline"
-            className="rounded-full px-8 border-2 hover:bg-foreground/5 transition-all hover:scale-105"
-          >
-            View Collections
           </Button>
         </motion.div>
       </div>
