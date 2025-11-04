@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import { Hero } from "./pageComponents/Hero";
 import { AdBanner } from "./pageComponents/AdBanner";
 import { ToolsGrid } from "./pageComponents/ToolsGrid";
@@ -19,13 +17,7 @@ export default function Home() {
 
         {/* Tools Grid Section */}
         <div id="tools">
-          <ToolsGrid
-            onToolClick={(tool) => {
-              if (tool.href) {
-                // handleNavigateToTool(tool.href);
-              }
-            }}
-          />
+          <ToolsGrid />
         </div>
 
         {/* Example Output Section */}

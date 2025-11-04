@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -8,16 +10,17 @@ import {
 import { Palette, Droplet, BoxSelect, Sparkles } from "lucide-react";
 
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 
 interface Tool {
   icon: React.ReactNode;
   title: string;
   description: string;
   gradient: string;
-  href?: string;
+  href: string;
 }
 
-const tools: Tool[] = [
+export const tools: Tool[] = [
   {
     icon: <Palette className="h-8 w-8" />,
     title: "Shades & Tints",
@@ -48,11 +51,13 @@ const tools: Tool[] = [
   },
 ];
 
-interface ToolsGridProps {
-  onToolClick?: (tool: Tool) => void;
-}
+export function ToolsGrid() {
+  const router = useRouter();
 
-export function ToolsGrid({ onToolClick }: ToolsGridProps) {
+  const handleNavigation = (path: string) => {
+    router.push("/css-tools/" + path);
+  };
+
   return (
     <section className="py-20 ">
       <div className="container mx-auto px-4">
@@ -75,7 +80,7 @@ export function ToolsGrid({ onToolClick }: ToolsGridProps) {
               <Card
                 className="glass-card overflow-hidden group cursor-pointer h-full transition-all hover:shadow-xl hover:-translate-y-2"
                 onClick={() => {
-                  onToolClick?.(tool);
+                  handleNavigation(tool.href);
                 }}
               >
                 <CardHeader>
@@ -101,20 +106,9 @@ export function ToolsGrid({ onToolClick }: ToolsGridProps) {
           <div className="inline-block glass-card rounded-2xl px-8 py-6">
             <p className="text-foreground/60 mb-4">More Tools</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <button
-                onClick={() =>
-                  onToolClick?.({
-                    icon: null,
-                    title: "Glassmorphism",
-                    description: "",
-                    gradient: "",
-                    href: "/glassmorphism",
-                  })
-                }
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors cursor-pointer"
-              >
-                Glassmorphism
-              </button>
+              <span className="px-4 py-2 rounded-full bg-foreground/10 text-foreground/50 text-sm">
+                Glassmorphism (Coming Soon)
+              </span>
               <span className="px-4 py-2 rounded-full bg-foreground/10 text-foreground/50 text-sm">
                 Neumorphism (Coming Soon)
               </span>

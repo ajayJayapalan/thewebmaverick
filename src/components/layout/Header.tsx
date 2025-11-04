@@ -59,7 +59,7 @@ export default function Header() {
             <div className="flex flex-col justify-center items-center gap-">
               <div className="text-lg ">
                 <span className="font-semibold">the</span>
-                <span className="font-black text-primary">CSS</span>
+                <span className="font-black text-primary">WEB</span>
               </div>
               <div className="font-light -mt-2">maverick</div>
             </div>

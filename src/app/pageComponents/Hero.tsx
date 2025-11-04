@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 
@@ -99,7 +100,7 @@ export function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6"
         >
           <Sparkles className="h-4 w-4" />
-          <span>Free CSS Tools for Designers & Developers</span>
+          <span>Completely Free CSS Tools for Designers & Developers</span>
         </motion.div>
 
         <motion.h1
