@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import clsx from "clsx";
 import { Palette, Droplet, BoxSelect, Sparkles } from "lucide-react";
 
 import { motion } from "motion/react";
@@ -78,9 +79,16 @@ export function ToolsGrid() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
-                className="glass-card overflow-hidden group cursor-pointer h-full transition-all hover:shadow-xl hover:-translate-y-2"
+                className={clsx(
+                  "glass-card  overflow-hidden group cursor-pointer h-full transition-all ",
+                  index !== 0
+                    ? "grayscale"
+                    : "hover:shadow-xl hover:-translate-y-2"
+                )}
                 onClick={() => {
-                  handleNavigation(tool.href);
+                  if (index == 0) {
+                    handleNavigation(tool.href);
+                  }
                 }}
               >
                 <CardHeader>

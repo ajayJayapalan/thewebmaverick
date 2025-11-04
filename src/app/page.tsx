@@ -2,6 +2,7 @@ import { Hero } from "./pageComponents/Hero";
 import { AdBanner } from "./pageComponents/AdBanner";
 import { ToolsGrid } from "./pageComponents/ToolsGrid";
 import { ExampleOutput } from "./pageComponents/ExampleOutput";
+// import AboutSection from "./pageComponents/About";
 
 export default function Home() {
   return (
@@ -23,6 +24,8 @@ export default function Home() {
         {/* Example Output Section */}
         <ExampleOutput />
 
+        {/* About Section */}
+        {/* <AboutSection /> */}
         {/* Ad Banner - Bottom */}
         {/* <div className="container mx-auto px-4 py-12">
           <AdBanner type="horizontal" />
