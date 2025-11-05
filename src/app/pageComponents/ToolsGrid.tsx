@@ -12,6 +12,7 @@ import { Palette, Droplet, BoxSelect, Sparkles } from "lucide-react";
 
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
+import { AdBanner } from "./AdBanner";
 
 interface Tool {
   icon: React.ReactNode;
@@ -60,7 +61,7 @@ export function ToolsGrid() {
   };
 
   return (
-    <section className="py-20 ">
+    <section className=" relative overflow-hidden min-h-screen flex flex-col justify-evenly items-center">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4">Powerful CSS Tools</h2>
@@ -110,7 +111,7 @@ export function ToolsGrid() {
         </div>
 
         {/* More tools section */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <div className="inline-block glass-card rounded-2xl px-8 py-6">
             <p className="text-foreground/60 mb-4">More Tools</p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -125,7 +126,10 @@ export function ToolsGrid() {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
+      </div>
+      <div className="container mx-auto px-4 mb-12">
+        <AdBanner type="horizontal" />
       </div>
     </section>
   );

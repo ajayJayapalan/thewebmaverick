@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@radix-ui/react-label";
-import { Check, Copy, RotateCw } from "lucide-react";
+import { Check, Copy, Info, RotateCw } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -55,7 +55,13 @@ function ColorVariations({ textColor = "", baseColor = "" }) {
     <div className="lg:col-span-3 space-y-6">
       <Card className="glass-card">
         <CardHeader>
-          <CardTitle>Color Variations</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>Color Variations</CardTitle>
+            <div className="flex gap-1 text-gray-500 items-center text-xs font-light">
+              <Info className="h3- w-3" />
+              <span className="">Click to copy the shade color</span>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
