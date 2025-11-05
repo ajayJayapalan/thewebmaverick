@@ -19,8 +19,6 @@ export default function Home() {
         {/* Example Output Section */}
         <ExampleOutput />
 
-        {/* About Section */}
-        {/* <AboutSection /> */}
         {/* Ad Banner - Bottom */}
         <div className="container mx-auto px-4 py-12">
           <AdBanner type="horizontal" />
