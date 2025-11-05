@@ -16,7 +16,7 @@ export default function ShadesAndTintsGenerator({
 
       <TintAndShadeGenerator />
 
-      <Toaster />
+      <Toaster position="top-center" />
     </div>
   );
 }

@@ -11,11 +11,6 @@ export default function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Ad Banner - Top */}
-        {/* <div className="container mx-auto px-4 mb-12">
-          <AdBanner type="horizontal" />
-        </div> */}
-
         {/* Tools Grid Section */}
         <div id="tools">
           <ToolsGrid />
@@ -27,9 +22,9 @@ export default function Home() {
         {/* About Section */}
         {/* <AboutSection /> */}
         {/* Ad Banner - Bottom */}
-        {/* <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12">
           <AdBanner type="horizontal" />
-        </div> */}
+        </div>
       </>
     </main>
   );

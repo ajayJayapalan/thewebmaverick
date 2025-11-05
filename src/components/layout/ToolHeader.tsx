@@ -1,4 +1,5 @@
 "use client";
+import { AdBanner } from "@/app/pageComponents/AdBanner";
 // import { AdBanner } from "@/app/pageComponents/AdBanner";
 import {
   Breadcrumb,
@@ -28,7 +29,7 @@ export default function ToolHeader() {
               onClick={onBack}
               className="cursor-pointer hover:text-primary"
             >
-              Css Tools
+              CSS Tools
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -57,7 +58,7 @@ export default function ToolHeader() {
       </div>
 
       {/* Top Ad Banner */}
-      {/* <AdBanner type="horizontal" className="mb-8" /> */}
+      <AdBanner type="horizontal" className="mb-8" />
     </div>
   );
 }
