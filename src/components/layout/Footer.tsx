@@ -8,12 +8,12 @@ export function Footer() {
           {/* Copyright */}
           <div className="text-center md:text-left">
             <p className="text-foreground/60">
-              © 2025 The CSS Maverick — Built for Designers & Developers
+              © 2025 The WEB Maverick — Built for Designers & Developers
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-6">
+          {/* <div className="flex items-center gap-6">
             <a
               href="https://github.com"
               target="_blank"
@@ -39,7 +39,7 @@ export function Footer() {
             >
               <Mail className="h-5 w-5" />
             </a>
-          </div>
+          </div> */}
 
           {/* Footer links */}
           <div className="flex items-center gap-6">
