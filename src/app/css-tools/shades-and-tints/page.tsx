@@ -2,6 +2,7 @@ import ToolHeader from "@/components/layout/ToolHeader";
 import TintAndShadeGenerator from "./pageComponets/TintAndShadeGenerator";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "CSS Shades & Tints Generator — Free Color Palette Tool",
@@ -52,6 +53,30 @@ interface ShadesAndTintsGeneratorProps {
   onBack: () => void;
 }
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "CSS Shades & Tints Generator",
+  applicationCategory: "WebApplication",
+  operatingSystem: "Web",
+  url: "https://thewebmaverick.com/css-tools/shades-and-tints",
+  description:
+    "Free CSS shades and tints generator for web designers and frontend developers. Instantly create accessible color palettes with CSS-ready values (HEX, RGB, HSL).",
+  keywords:
+    "css shades generator, css tints generator, color palette generator, web color tools, free css utilities",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: {
+    "@type": "Organization",
+    name: "The Web Maverick",
+    url: "https://thewebmaverick.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "The Web Maverick",
+    url: "https://thewebmaverick.com",
+  },
+};
+
 export default function ShadesAndTintsGenerator({
   onBack,
 }: ShadesAndTintsGeneratorProps) {
@@ -63,6 +88,13 @@ export default function ShadesAndTintsGenerator({
       <TintAndShadeGenerator />
 
       <Toaster position="top-center" />
+
+      <Script
+        id="schema-shades"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
     </div>
   );
 }
