@@ -82,12 +82,13 @@ export function ToolsGrid() {
               <Card
                 className={clsx(
                   "glass-card  overflow-hidden group cursor-pointer h-full transition-all ",
-                  index !== 0
-                    ? "grayscale"
-                    : "hover:shadow-xl hover:-translate-y-2"
+                  // index !== 0
+                  //   ? "grayscale"
+                  //   :
+                  "hover:shadow-xl hover:-translate-y-2"
                 )}
                 onClick={() => {
-                  if (index == 0) {
+                  if ([0, 1].includes(index)) {
                     handleNavigation(tool.href);
                   }
                 }}

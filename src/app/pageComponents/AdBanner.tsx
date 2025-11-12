@@ -4,6 +4,7 @@ interface AdBannerProps {
 }
 
 export function AdBanner({ type, className = "" }: AdBannerProps) {
+  return <></>;
   const dimensions = type === "horizontal" ? "w-full h-24" : "w-full h-96";
 
   return (

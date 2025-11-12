@@ -22,7 +22,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col justify-evenly items-center">
+    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center items-center">
       {/* Animated gradient background */}
       <div>
         <div className="absolute inset-0 -z-10">
@@ -146,9 +146,9 @@ export function Hero() {
       </div>
 
       {/* Ad Banner - Top */}
-      <div className="container mx-auto px-4 mb-12">
+      {/* <div className="container mx-auto px-4 mb-12">
         <AdBanner type="horizontal" />
-      </div>
+      </div> */}
     </section>
   );
 }
