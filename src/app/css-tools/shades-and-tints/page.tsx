@@ -49,10 +49,6 @@ export const metadata: Metadata = {
   },
 };
 
-interface ShadesAndTintsGeneratorProps {
-  onBack: () => void;
-}
-
 const schema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -77,24 +73,23 @@ const schema = {
   },
 };
 
-export default function ShadesAndTintsGenerator({
-  onBack,
-}: ShadesAndTintsGeneratorProps) {
+export default function ShadesAndTintsGenerator() {
   return (
     <div className="min-h-screen">
       {/* Header with breadcrumb */}
-      <ToolHeader />
-
-      <TintAndShadeGenerator />
-
-      <Toaster position="top-center" />
-
+      <ToolHeader
+        routeLabel={"Shades & Tints"}
+        title={"Shades & Tints Generator"}
+        description={"Generate lighter and darker variations of any color"}
+      />
       <Script
         id="schema-shades"
         type="application/ld+json"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+
+      <TintAndShadeGenerator />
     </div>
   );
 }
