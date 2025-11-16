@@ -88,9 +88,9 @@ export function ToolsGrid() {
                   "hover:shadow-xl hover:-translate-y-2"
                 )}
                 onClick={() => {
-                  if ([0, 1].includes(index)) {
-                    handleNavigation(tool.href);
-                  }
+                  // if ([0, 1].includes(index)) {
+                  handleNavigation(tool.href);
+                  // }
                 }}
               >
                 <CardHeader>

@@ -1,4 +1,5 @@
 "use client";
+import ToolHeader from "@/components/layout/ToolHeader";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,9 +32,77 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 
-interface ColorTheoryGeneratorProps {
-  onBack: () => void;
-}
+import type { Metadata } from "next";
+import Script from "next/script";
+
+export const metadata: Metadata = {
+  title: "Color Theory Tool — Harmonies, Schemes & Palettes Generator",
+  description:
+    "Explore color harmonies and generate perfect palettes using The Web Maverick’s Color Theory Tool. Create complementary, analogous, triadic and tetradic color schemes with instant CSS-ready output.",
+  alternates: {
+    canonical: "https://thewebmaverick.com/css-tools/color-theory",
+  },
+  keywords: [
+    "color theory tool",
+    "color scheme generator",
+    "color harmony generator",
+    "complementary colors",
+    "analogous colors",
+    "triadic color palette",
+    "tetradic color scheme",
+    "color wheel tool",
+    "css color generator",
+    "web design color tools",
+    "ui color palette generator",
+    "color combinations",
+    "frontend design tools",
+    "the web maverick",
+    "hsl color tool",
+    "hex color palettes",
+    "color psychology tool",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://thewebmaverick.com/css-tools/color-theory",
+    siteName: "The Web Maverick",
+    title:
+      "Color Theory Tool — Harmonies, Schemes & Palettes Generator | The Web Maverick",
+    description:
+      "Generate color harmonies like complementary, triadic, tetradic, and analogous palettes with instant CSS output. Perfect for designers and developers.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Color Theory Tool — Create Harmonies & Color Schemes | The Web Maverick",
+    description:
+      "Free color theory tool to explore harmonies and generate professional UX/UI color palettes. Get CSS-ready HEX, RGB, and HSL values instantly.",
+    creator: "@thewebmaverick",
+  },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Color Theory Tool",
+  applicationCategory: "WebApplication",
+  operatingSystem: "Web",
+  url: "https://thewebmaverick.com/css-tools/color-theory",
+  description:
+    "Interactive color theory generator for web designers and developers. Explore color harmonies and generate CSS-ready color schemes instantly.",
+  keywords:
+    "color theory, color harmony generator, color palette tool, complementary colors, css color generator",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: {
+    "@type": "Organization",
+    name: "The Web Maverick",
+    url: "https://thewebmaverick.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "The Web Maverick",
+    url: "https://thewebmaverick.com",
+  },
+};
 
 type SchemeType =
   | "complementary"
@@ -42,9 +111,31 @@ type SchemeType =
   | "tetradic"
   | "monochrome";
 
-export default function ColorTheoryGenerator({
-  onBack,
-}: ColorTheoryGeneratorProps) {
+export default function ColorTheoryGenerator() {
+  return (
+    <div className="min-h-screen">
+      {/* Header with breadcrumb */}
+      <ToolHeader
+        routeLabel="Color Theory"
+        title="Color Theory Palette Generator"
+        description="Generate harmonious color palettes based on color theory"
+      />
+
+      {/* JSON-LD Structured Data */}
+      <Script
+        id="schema-color-theory"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+
+      {/* Main content */}
+      <PageContent />
+    </div>
+  );
+}
+
+const PageContent = () => {
   const [baseColor, setBaseColor] = useState("#667eea");
   const [schemeType, setSchemeType] = useState<SchemeType>("complementary");
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -207,149 +298,107 @@ export default function ColorTheoryGenerator({
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Header with breadcrumb */}
-      <div className="container mx-auto px-4 py-6">
-        <Breadcrumb className="mb-4">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink
-                onClick={onBack}
-                className="cursor-pointer hover:text-primary"
-              >
-                Tools
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Color Theory</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+    <div className="container mx-auto px-4 pb-16">
+      <div className="grid lg:grid-cols-4 gap-6">
+        {/* Main content area - 3 columns */}
+        <div className="lg:col-span-3 space-y-6">
+          {/* Color palette display */}
+          <Card className="glass-card">
+            <CardHeader>
+              <div className="flex justify-between items-center">
+                <CardTitle>Color Palette</CardTitle>
+                <Button
+                  onClick={copyAllColors}
+                  size="sm"
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  <Copy className="h-4 w-4 mr-2" />
+                  Copy All
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {palette.map((color, index) => {
+                  const isBase =
+                    index === 0 ||
+                    (schemeType === "analogous" && index === 1) ||
+                    (schemeType === "monochrome" && index === 2);
 
-        <div className="flex items-start justify-between mb-8">
-          <div>
-            <h1 className="text-4xl mb-2">Color Theory Palette Generator</h1>
-            <p className="text-foreground/70">
-              Generate harmonious color palettes based on color theory
-            </p>
-          </div>
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="hover:bg-foreground/5"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
-        </div>
-
-        {/* Top Ad Banner */}
-        {/* <AdBanner type="horizontal" className="mb-8" /> */}
-      </div>
-
-      {/* Main content */}
-      <div className="container mx-auto px-4 pb-16">
-        <div className="grid lg:grid-cols-4 gap-6">
-          {/* Main content area - 3 columns */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Color palette display */}
-            <Card className="glass-card">
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <CardTitle>Color Palette</CardTitle>
-                  <Button
-                    onClick={copyAllColors}
-                    size="sm"
-                    className="bg-primary hover:bg-primary/90"
-                  >
-                    <Copy className="h-4 w-4 mr-2" />
-                    Copy All
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {palette.map((color, index) => {
-                    const isBase =
-                      index === 0 ||
-                      (schemeType === "analogous" && index === 1) ||
-                      (schemeType === "monochrome" && index === 2);
-
-                    return (
-                      <div key={index} className="relative group">
-                        <div
-                          className="aspect-square rounded-2xl transition-all group-hover:scale-105 group-hover:shadow-xl flex items-center justify-center cursor-pointer relative overflow-hidden"
-                          style={{ backgroundColor: color }}
-                          onClick={() => copyColor(color, index)}
-                        >
-                          {isBase && (
-                            <div className="absolute top-2 left-2 px-2 py-1 rounded-full text-xs bg-white/20 text-white backdrop-blur-sm">
-                              Base
-                            </div>
-                          )}
-                          <div className="opacity-0 group-hover:opacity-100 transition-opacity text-white">
-                            {copiedIndex === index ? (
-                              <Check className="h-6 w-6" />
-                            ) : (
-                              <Copy className="h-6 w-6" />
-                            )}
-                          </div>
-                        </div>
-                        <div className="mt-2 text-center">
-                          <p className="text-sm">{color.toUpperCase()}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Live preview with palette */}
-            <Card className="glass-card">
-              <CardHeader>
-                <CardTitle>Palette Preview</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {/* Preview with gradients */}
-                  <div
-                    className="h-48 rounded-2xl border border-gray-200"
-                    style={{
-                      background: `linear-gradient(135deg, ${palette
-                        .map((color, i) => {
-                          const stop = (i / (palette.length - 1)) * 100;
-                          return `${color} ${stop}%`;
-                        })
-                        .join(", ")})`,
-                    }}
-                  />
-
-                  {/* Color bars */}
-                  <div className="flex h-16 rounded-xl overflow-hidden">
-                    {palette.map((color, index) => (
+                  return (
+                    <div key={index} className="relative group">
                       <div
-                        key={index}
-                        className="flex-1 transition-all hover:flex-[1.5] cursor-pointer"
+                        className="aspect-square rounded-2xl transition-all group-hover:scale-105 group-hover:shadow-xl flex items-center justify-center cursor-pointer relative overflow-hidden"
                         style={{ backgroundColor: color }}
                         onClick={() => copyColor(color, index)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                      >
+                        {isBase && (
+                          <div className="absolute top-2 left-2 px-2 py-1 rounded-full text-xs bg-white/20 text-white backdrop-blur-sm">
+                            Base
+                          </div>
+                        )}
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity text-white">
+                          {copiedIndex === index ? (
+                            <Check className="h-6 w-6" />
+                          ) : (
+                            <Copy className="h-6 w-6" />
+                          )}
+                        </div>
+                      </div>
+                      <div className="mt-2 text-center">
+                        <p className="text-sm">{color.toUpperCase()}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* CSS Output */}
-            <Card className="glass-card">
-              <CardHeader>
-                <CardTitle>CSS Code</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <pre className="bg-foreground/5 rounded-xl p-4 overflow-x-auto text-sm">
-                  <code>
-                    {`:root {
+          {/* Live preview with palette */}
+          <Card className="glass-card">
+            <CardHeader>
+              <CardTitle>Palette Preview</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {/* Preview with gradients */}
+                <div
+                  className="h-48 rounded-2xl border border-gray-200"
+                  style={{
+                    background: `linear-gradient(135deg, ${palette
+                      .map((color, i) => {
+                        const stop = (i / (palette.length - 1)) * 100;
+                        return `${color} ${stop}%`;
+                      })
+                      .join(", ")})`,
+                  }}
+                />
+
+                {/* Color bars */}
+                <div className="flex h-16 rounded-xl overflow-hidden">
+                  {palette.map((color, index) => (
+                    <div
+                      key={index}
+                      className="flex-1 transition-all hover:flex-[1.5] cursor-pointer"
+                      style={{ backgroundColor: color }}
+                      onClick={() => copyColor(color, index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* CSS Output */}
+          <Card className="glass-card">
+            <CardHeader>
+              <CardTitle>CSS Code</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <pre className="bg-foreground/5 rounded-xl p-4 overflow-x-auto text-sm">
+                <code>
+                  {`:root {
 ${palette
   .map((color, index) => `  --palette-${index + 1}: ${color};`)
   .join("\n")}
@@ -358,96 +407,93 @@ ${palette
 /* Example usage */
 .primary { background: ${palette[0]}; }
 .secondary { background: ${palette[1] || palette[0]}; }`}
-                  </code>
-                </pre>
-              </CardContent>
-            </Card>
-          </div>
+                </code>
+              </pre>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* Sidebar - Controls and Ad */}
-          <div className="space-y-6">
-            {/* Controls */}
-            <Card className="glass-card">
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <CardTitle>Controls</CardTitle>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={randomizeColor}
-                    className="rounded-full"
-                  >
-                    <RotateCw className="h-4 w-4" />
-                  </Button>
+        {/* Sidebar - Controls and Ad */}
+        <div className="space-y-6">
+          {/* Controls */}
+          <Card className="glass-card">
+            <CardHeader>
+              <div className="flex justify-between items-center">
+                <CardTitle>Controls</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={randomizeColor}
+                  className="rounded-full"
+                >
+                  <RotateCw className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Base color picker */}
+              <div className="space-y-2">
+                <Label>Base Color</Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="color"
+                    value={baseColor}
+                    onChange={(e) => setBaseColor(e.target.value)}
+                    className="w-16 h-10 p-1 cursor-pointer"
+                  />
+                  <Input
+                    type="text"
+                    value={baseColor}
+                    onChange={(e) => setBaseColor(e.target.value)}
+                    className="flex-1"
+                    placeholder="#667eea"
+                  />
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {/* Base color picker */}
-                <div className="space-y-2">
-                  <Label>Base Color</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="color"
-                      value={baseColor}
-                      onChange={(e) => setBaseColor(e.target.value)}
-                      className="w-16 h-10 p-1 cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={baseColor}
-                      onChange={(e) => setBaseColor(e.target.value)}
-                      className="flex-1"
-                      placeholder="#667eea"
-                    />
-                  </div>
-                </div>
+              </div>
 
-                {/* Scheme type selector */}
-                <div className="space-y-2">
-                  <Label>Color Scheme</Label>
-                  <Select
-                    value={schemeType}
-                    onValueChange={(v) => setSchemeType(v as SchemeType)}
-                  >
-                    <SelectTrigger className="border-2 min-w-[12rem] border-sky-500 focus:ring-2 focus:ring-sky-300 focus:border-sky-600 rounded-md">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="complementary">
-                        Complementary
-                      </SelectItem>
-                      <SelectItem value="analogous">Analogous</SelectItem>
-                      <SelectItem value="triadic">Triadic</SelectItem>
-                      <SelectItem value="tetradic">Tetradic</SelectItem>
-                      <SelectItem value="monochrome">Monochrome</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <p className="text-xs text-foreground/60 flex">
-                    {/* <Info className="h-5 w-5 mr-1" /> */}
-                    {schemeDescriptions[schemeType]}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Pro tip */}
-            <Card className="glass-card bg-secondary/20 border-secondary/30">
-              <CardHeader>
-                <CardTitle className="text-base">💡 Pro Tip</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-foreground/70">
-                  Click the lock icon on colors you want to keep when
-                  regenerating the palette.
+              {/* Scheme type selector */}
+              <div className="space-y-2">
+                <Label>Color Scheme</Label>
+                <Select
+                  value={schemeType}
+                  onValueChange={(v) => setSchemeType(v as SchemeType)}
+                >
+                  <SelectTrigger className="border-2 min-w-[12rem] border-sky-500 focus:ring-2 focus:ring-sky-300 focus:border-sky-600 rounded-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="complementary">Complementary</SelectItem>
+                    <SelectItem value="analogous">Analogous</SelectItem>
+                    <SelectItem value="triadic">Triadic</SelectItem>
+                    <SelectItem value="tetradic">Tetradic</SelectItem>
+                    <SelectItem value="monochrome">Monochrome</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-foreground/60 flex">
+                  {/* <Info className="h-5 w-5 mr-1" /> */}
+                  {schemeDescriptions[schemeType]}
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Side Ad */}
-            {/* <AdBanner type="vertical" /> */}
-          </div>
+          {/* Pro tip */}
+          <Card className="glass-card bg-secondary/20 border-secondary/30">
+            <CardHeader>
+              <CardTitle className="text-base">💡 Pro Tip</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-foreground/70">
+                Click the lock icon on colors you want to keep when regenerating
+                the palette.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Side Ad */}
+          {/* <AdBanner type="vertical" /> */}
         </div>
       </div>
     </div>
   );
-}
+};
